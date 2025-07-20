@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ArtWork Addon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #111;
+      --card-bg: #1c1c1e;
+      --text-color: #f0f0f0;
+      --accent: #7b61ff;
+      --accent-hover: #9c8dff;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: var(--card-bg);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 16px;
+      object-fit: cover;
+      box-shadow: 0 0 10px rgba(123, 97, 255, 0.3);
+    }
+
+    .title-group {
+      flex: 1;
+    }
+
+    .title {
+      font-size: 28px;
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .author {
+      font-size: 16px;
+      color: #aaa;
+      margin-top: 4px;
+    }
+
+    .description {
+      margin-top: 20px;
+      font-size: 16px;
+    }
+
+    .screenshots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .screenshots img {
+      width: 30%;
+      min-width: 180px;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+      object-fit: cover;
+      max-height: 180px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .screenshots img:hover {
+      transform: scale(1.03);
+    }
+
+    .download-btn {
+      margin-top: 30px;
+      display: inline-block;
+      padding: 14px 28px;
+      background-color: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 12px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .download-btn:hover {
+      background-color: var(--accent-hover);
+      transform: scale(1.05);
+    }
+
+    .addon-id {
+      margin-top: 30px;
+      font-size: 13px;
+      color: #777;
+      text-align: right;
+    }
+
+    @media (max-width: 600px) {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .avatar {
+        width: 60px;
+        height: 60px;
+      }
+
+      .screenshots {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .screenshots img {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="" alt="Addon Logo" class="avatar" id="addon-logo" />
+      <div class="title-group">
+        <h1 class="title" id="addon-name">Загрузка...</h1>
+        <div class="author" id="addon-author">ArtWOrk Addon</div>
+      </div>
+    </div>
+
+    <p class="description" id="addon-description">Загрузка описания...</p>
+
+    <div class="screenshots" id="addon-screenshots"></div>
+
+    <a href="#" class="download-btn" id="download-link" target="_blank">
+      ⬇ Download
+    </a>
+
+    <div class="addon-id" id="addon-id-display"></div>
+  </div>
+
+  <script>
+    async function loadAddonData() {
+      const params = new URLSearchParams(window.location.search);
+      const addonId = params.get("id");
+      const displayId = document.getElementById("addon-id-display");
+      if (!addonId) {
+        document.getElementById("addon-name").textContent = "Error: Addon ID not specified.";
+        return;
+      }
+
+      displayId.textContent = "Addon ID:" + addonId;
+
+      const url = `https://raw.githubusercontent.com/EngineArtWork/EngineArtWork.github.io/refs/heads/main/Store/Addons/Addon${addonId}`;
+
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Failed to load data");
+
+        const data = await response.json();
+
+        document.getElementById("addon-name").textContent = data.Name || "Untitled";
+        document.getElementById("addon-description").textContent = data.Description || "No description.";
+        document.getElementById("addon-logo").src = data.Logo || "";
+        document.getElementById("addon-author").textContent = data.Author || "Unknown author";
+        document.getElementById("download-link").href = data.DownloadLink || "#";
+
+        const screenshots = document.getElementById("addon-screenshots");
+        ["Screenshot1", "Screenshot2", "Screenshot3"].forEach(key => {
+          if (data[key]) {
+            const img = document.createElement("img");
+            img.src = data[key];
+            img.alt = "Скриншот";
+            screenshots.appendChild(img);
+          }
+        });
+
+      } catch (err) {
+        document.getElementById("addon-name").textContent = "Loading error";
+        document.getElementById("addon-description").textContent = "Failed to load addon data.";
+        console.error("Ошибка загрузки аддона:", err);
+      }
+    }
+
+    loadAddonData();
+  </script>
+</body>
+</html>
