@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArtWork Engine</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            primary: '#8B5CF6',
+            secondary: '#22D3EE',
+            dark: '#0F172A',
+            light: '#1E293B'
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .fade-in {
+      animation: fadeIn 1.2s ease-out both;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-bg {
+      background: linear-gradient(120deg, #1E293B 0%, #0F172A 100%);
+    }
+  </style>
+</head>
+<body class="bg-dark text-white">
+  <header class="flex justify-between items-center p-6 bg-light shadow-lg sticky top-0 z-50">
+    <h1 class="text-3xl font-extrabold text-primary">ArtWork Engine</h1>
+    <div class="flex gap-4 items-center">
+      <button class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-xl transition shadow-md text-sm">Download</button>
+      <select id="langSwitcher" class="bg-dark text-white px-3 py-2 rounded border border-gray-700">
+        <option value="en">EN</option>
+        <option value="ru">RU</option>
+      </select>
+    </div>
+  </header>
+
+  <section class="hero-bg text-center py-28 px-6 fade-in">
+    <h2 class="text-5xl font-extrabold mb-6 leading-tight">Unleash Your Creativity<br>with <span class="text-primary">ArtWork Engine</span></h2>
+    <p class="text-gray-300 max-w-3xl mx-auto text-lg mb-10">Next-gen development environment with AI support, visual tools, custom scripting and powerful export options — all in one place.</p>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyH5BF3nlenlecGs9NAhLOYm2b3GTMvf42Tw&s" alt="Hero Image" class="rounded-2xl mx-auto shadow-2xl w-full max-w-5xl">
+  </section>
+
+  <section class="py-24 px-6 fade-in">
+    <h3 class="text-4xl font-semibold text-center mb-14">Why Choose ArtWork Engine?</h3>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+      <div class="bg-light rounded-2xl p-8 shadow-md hover:shadow-xl transition border border-gray-700">
+        <h4 class="text-xl font-bold mb-2">User-Friendly Interface</h4>
+        <p class="text-gray-300">Focus on your vision with an elegant, streamlined editor.</p>
+      </div>
+      <div class="bg-light rounded-2xl p-8 shadow-md hover:shadow-xl transition border border-gray-700">
+        <h4 class="text-xl font-bold mb-2">Addons & Customization</h4>
+        <p class="text-gray-300">Powerful modular system for unlimited expansion.</p>
+      </div>
+      <div class="bg-light rounded-2xl p-8 shadow-md hover:shadow-xl transition border border-gray-700">
+        <h4 class="text-xl font-bold mb-2">AI Assistant</h4>
+        <p class="text-gray-300">Smart code suggestions, fixes and even generation – instantly.</p>
+      </div>
+      <div class="bg-light rounded-2xl p-8 shadow-md hover:shadow-xl transition border border-gray-700">
+        <h4 class="text-xl font-bold mb-2">Multi-Format Packaging</h4>
+        <p class="text-gray-300">Build once and export to Web (HTML), Desktop (EXE), or Mobile (APK).</p>
+      </div>
+      <div class="bg-light rounded-2xl p-8 shadow-md hover:shadow-xl transition border border-gray-700">
+        <h4 class="text-xl font-bold mb-2">Lightning-Fast</h4>
+        <p class="text-gray-300">Optimized core for maximum performance even on low-end hardware.</p>
+      </div>
+      <div class="bg-light rounded-2xl p-8 shadow-md hover:shadow-xl transition border border-gray-700">
+        <h4 class="text-xl font-bold mb-2">ArtLang — Native Language</h4>
+        <p class="text-gray-300">Our own powerful, easy-to-learn scripting language designed for ArtWork Engine.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 px-6 text-center fade-in">
+    <h3 class="text-4xl font-semibold mb-8">Insert Your Showcase Here</h3>
+    <p class="text-gray-400 mb-10">Preview your game, visual novel, UI or anything built with ArtWork Engine.</p>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyH5BF3nlenlecGs9NAhLOYm2b3GTMvf42Tw&s" alt="Placeholder" class="rounded-xl mx-auto shadow-2xl w-full max-w-5xl">
+  </section>
+
+  <footer class="bg-light text-gray-500 py-8 text-center border-t border-gray-700">
+    <p>&copy; 2025 ArtWork Engine. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        header: "ArtWork Engine",
+        download: "Download",
+        heroTitle: "Unleash Your Creativity with ArtWork Engine",
+        heroDesc: "Next-gen development environment with AI support, visual tools, custom scripting and powerful export options — all in one place.",
+        featuresTitle: "Why Choose ArtWork Engine?",
+      },
+      ru: {
+        header: "Движок ArtWork",
+        download: "Скачать",
+        heroTitle: "Открой свой креатив с ArtWork Engine",
+        heroDesc: "Современная среда разработки с ИИ-помощником, визуальными инструментами, скриптингом и мощной системой экспорта — всё в одном.",
+        featuresTitle: "Почему ArtWork Engine?",
+      }
+    };
+
+    document.getElementById('langSwitcher').addEventListener('change', function () {
+      const lang = this.value;
+      document.querySelector('h1').textContent = translations[lang].header;
+      document.querySelector('button').textContent = translations[lang].download;
+      document.querySelector('section.hero-bg h2').innerHTML = translations[lang].heroTitle;
+      document.querySelector('section.hero-bg p').textContent = translations[lang].heroDesc;
+      document.querySelector('section:nth-of-type(2) h3').textContent = translations[lang].featuresTitle;
+    });
+  </script>
+</body>
+</html>
